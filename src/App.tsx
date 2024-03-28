@@ -9,12 +9,12 @@ export const App = () => {
       templateAreas={`"header"
                   "main"
                   "footer"`}
-      gridTemplateRows={'50px 1fr 30px'}
+      gridTemplateRows={'100px 1fr 30px'}
       h='100vh'
       w={'98vw'}
       gap='1'
     >
-      <GridItem pl='2' area={'header'}>
+      <GridItem pl='2' area={'header'} marginTop={'2%'} borderBottom={'1px ridge'}>
         <Header />
       </GridItem>
       <GridItem pl='2' area={'main'}>

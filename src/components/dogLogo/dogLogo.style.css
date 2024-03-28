@@ -1,0 +1,24 @@
+@keyframes spin {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.logo-container {
+  cursor: pointer;
+  display: inline-block;
+  perspective: 1000px;
+}
+
+.logo-container img {
+  display: block;
+  transition: transform 1s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.logo-container.spinning img {
+  animation: spin 1s ease-in-out forwards;
+}
