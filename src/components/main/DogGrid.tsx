@@ -4,10 +4,14 @@ import { useEffect, useState } from 'react';
 import { useDogs } from '../../hooks/useDogs';
 import { BreedCard } from './cards/BreedCard';
 import { initialDogs } from '../../models/initialDogs';
+import { ImageModal } from './ImageModal';
 
 export const DogGrid = () => {
-  const { getBreedList, getRandomImage } = useDogs();
+  const { getBreedList, getRandomImage, getImagesByBreed } = useDogs();
   const [breeds, setBreeds] = useState<Record<string, string>>({});
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [breedToDisplay, setBreedToDisplay] = useState<string | null>(null);
+  const [breedImages, setBreedImages] = useState<string[]>([]);
 
   const fetchDogs = async () => {
     const response = await getBreedList();
@@ -35,8 +39,20 @@ export const DogGrid = () => {
     }
   });
 
-  const handleBreedClick = (breed: string) => {
-    console.log('fetching more images of', breed);
+  const handleBreedClick = async (breed: string) => {
+    const response = await getImagesByBreed(breed);
+    if (response) {
+      const images = response.message;
+      setBreedToDisplay(breed);
+      setBreedImages(images);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setBreedImages([]);
+    setBreedToDisplay(null);
   };
 
   return (
@@ -60,6 +76,14 @@ export const DogGrid = () => {
             ))
           : Array.from({ length: 12 }).map((_, index) => <CardSkeleton key={index} />)}
       </SimpleGrid>
+      {breedToDisplay && breedImages.length > 0 && (
+        <ImageModal
+          breed={breedToDisplay}
+          images={breedImages}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
     </>
   );
 };
