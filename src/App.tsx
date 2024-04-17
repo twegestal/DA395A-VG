@@ -1,28 +1,24 @@
-import { Grid, GridItem } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { DogGrid } from './components/main/DogGrid';
-import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
+import { Footer } from './components/footer/Footer';
 
 export const App = () => {
   return (
-    <Grid
-      templateAreas={`"header"
-                  "main"
-                  "footer"`}
-      gridTemplateRows={'100px 1fr 30px'}
-      h='100vh'
-      w={'98vw'}
-      gap='1'
-    >
-      <GridItem pl='2' area={'header'} marginTop={'2%'} borderBottom={'1px ridge'}>
-        <Header />
-      </GridItem>
-      <GridItem pl='2' area={'main'}>
+    <Flex direction={'column'} minH={'100vh'}>
+      <Header />
+      <Flex
+        flex={'1'}
+        direction={'column'}
+        p={'4'}
+        overflowY={'auto'}
+        backgroundColor={'gray.50'}
+        borderTop={'1px'}
+        borderColor={'gray.300'}
+      >
         <DogGrid />
-      </GridItem>
-      <GridItem pl='2' area={'footer'}>
-        <Footer />
-      </GridItem>
-    </Grid>
+      </Flex>
+      <Footer />
+    </Flex>
   );
 };
