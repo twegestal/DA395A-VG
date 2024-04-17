@@ -1,7 +1,25 @@
 import { SimpleGrid } from '@chakra-ui/react';
-import { CardSkeleton } from './CardSkeleton';
+import { CardSkeleton } from './cards/CardSkeleton';
+import { useEffect } from 'react';
+import { useDogs } from '../../hooks/useDogs';
 
 export const DogGrid = () => {
+  const { getBreedList, getImagesByBreed } = useDogs();
+
+  const fetchDogs = async () => {
+    const dogs = await getBreedList();
+    console.log(dogs);
+  };
+
+  const fetchImages = async () => {
+    const images = await getImagesByBreed('basenji');
+    console.log(images);
+  };
+
+  useEffect(() => {
+    fetchDogs();
+    fetchImages();
+  });
   return (
     <>
       <SimpleGrid
