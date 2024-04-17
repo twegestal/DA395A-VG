@@ -1,37 +1,49 @@
 import { ZodError } from 'zod';
-import { breedSchema, imageSchema } from '../validators/dogSchemas';
+import { breedSchema, imageSchema, randomImageSchema } from '../validators/dogSchemas';
 import { useApi } from './useApi';
+import { BreedResponse, ImageResponse, RandomImageResponse } from '../types/dogTypes';
 
 export const useDogs = () => {
   const breedListApi = useApi('getBreeds');
   const imagesByBreedApi = useApi('getImagesByBreed');
+  const randomImageByBreed = useApi('getRandomImageByBreed');
 
-  const getBreedList = async () => {
+  const getBreedList = async (): Promise<BreedResponse | undefined> => {
     try {
       const response = await breedListApi();
       const parsedResponse = breedSchema.parse(response);
-      return parsedResponse.message;
+      return parsedResponse;
     } catch (error) {
-      if (error instanceof ZodError) {
-        console.error('Validation error: ', error);
-      } else {
-        console.error('Error fetching breed list: ', error);
-      }
+      printError(error);
     }
   };
 
-  const getImagesByBreed = async (breed: string) => {
+  const getImagesByBreed = async (breed: string): Promise<ImageResponse | undefined> => {
     try {
       const response = await imagesByBreedApi(breed);
       const parsedResponse = imageSchema.parse(response);
-      return parsedResponse.message;
+      return parsedResponse;
     } catch (error) {
-      if (error instanceof ZodError) {
-        console.error('Validation error: ', error);
-      } else {
-        console.error('Error fetching breed list: ', error);
-      }
+      printError(error);
     }
   };
-  return { getBreedList, getImagesByBreed };
+
+  const getRandomImage = async (breed: string): Promise<RandomImageResponse | undefined> => {
+    try {
+      const response = await randomImageByBreed(breed);
+      const parsedResponse = randomImageSchema.parse(response);
+      return parsedResponse;
+    } catch (error) {
+      printError(error);
+    }
+  };
+
+  const printError = (error: unknown) => {
+    if (error instanceof ZodError) {
+      console.error('Validation error: ', error);
+    } else {
+      console.error('Error fetching breed list: ', error);
+    }
+  };
+  return { getBreedList, getImagesByBreed, getRandomImage };
 };

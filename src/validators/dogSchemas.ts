@@ -11,3 +11,7 @@ export const breedSchema = baseSchema.extend({
 export const imageSchema = baseSchema.extend({
   message: z.array(z.string().url()),
 });
+
+export const randomImageSchema = baseSchema.extend({
+  message: z.string().url(),
+});
