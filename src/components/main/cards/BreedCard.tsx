@@ -6,6 +6,12 @@ interface Props {
   onClick: () => void;
 }
 
+/**
+ * This component represents a single breed card in the UI.
+ * It displays an image and the name of a dog breed.
+ * The card includes a button that, when clicked, triggers an action to fetch and display more images of the specified breed.
+ */
+
 export const BreedCard = ({ breed, image, onClick }: Props) => {
   return (
     <Card width={'300px'} borderRadius={10} overflow={'hidden'}>

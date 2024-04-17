@@ -3,6 +3,11 @@ import { DogGrid } from './components/main/DogGrid';
 import { Header } from './components/header/Header';
 import { Footer } from './components/footer/Footer';
 
+/**
+ * Defines the main structure of the application, organizing the `Header`, `DogGrid`, 
+ * and `Footer` components into a full-page layout with a scrollable content area.
+ */
+
 export const App = () => {
   return (
     <Flex direction={'column'} minH={'100vh'}>

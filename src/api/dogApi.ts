@@ -1,4 +1,8 @@
 import ky from 'ky';
+
+/**
+ * This module defines API endpoint functions.
+ */
 export const dogApi = (apiClient: typeof ky) => ({
   getBreeds: async () => {
     const response = await apiClient.get('breeds/list/all').json();

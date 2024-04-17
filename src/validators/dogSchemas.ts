@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+/**
+ * This file defines the Zod schemas used for validating API responses related to dog information within the application.
+ */
+
 const baseSchema = z.object({
   status: z.literal('success'),
 });

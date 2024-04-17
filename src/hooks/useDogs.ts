@@ -3,6 +3,11 @@ import { breedSchema, imageSchema, randomImageSchema } from '../validators/dogSc
 import { useApi } from './useApi';
 import { BreedResponse, ImageResponse, RandomImageResponse } from '../types/dogTypes';
 
+/**
+ * This hook encapsulates API calls related to dog breeds and images using custom validators.
+ * It utilizes Zod for runtime validation of API responses to match expected schemas for breeds, images, and random images.
+ */
+
 export const useDogs = () => {
   const breedListApi = useApi('getBreeds');
   const imagesByBreedApi = useApi('getImagesByBreed');

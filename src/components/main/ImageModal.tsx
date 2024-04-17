@@ -18,6 +18,10 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Provides a modal window to display a gallery of images for a specific dog breed.
+ */
+
 export const ImageModal = ({ breed, images, isOpen, onClose }: Props) => {
   return (
     <Modal size={'xl'} isOpen={isOpen} onClose={onClose}>
