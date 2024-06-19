@@ -7,8 +7,8 @@ import { initialDogs } from '../../models/initialDogs';
 import { ImageModal } from './ImageModal';
 
 /**
- * Manages the display of dog breeds in a grid format, initiates fetch operations to gather breed data and images, 
- * and handles user interactions to display more images in a modal. 
+ * Manages the display of dog breeds in a grid format, initiates fetch operations to gather breed data and images,
+ * and handles user interactions to display more images in a modal.
  * Uses `useDogs` hook for API calls and manages local state for breeds, selected breed details, and modal visibility.
  */
 
